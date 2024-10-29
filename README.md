@@ -1,51 +1,46 @@
-#Hardening Script for RHEL8
+# Hardening Script for RHEL8
 
-DescriptionThis security hardening script is designed for RHEL8 operating systems. It implements a series of security configurations to enhance system protection, including disabling unnecessary kernel modules, configuring SELinux, cryptographic policies, time synchronization, and network parameter settings.
+## Description
 
-Prerequisites
+This security hardening script is designed for **RHEL8** operating systems. It implements a series of security configurations to enhance system protection, including disabling unnecessary kernel modules, configuring **SELinux**, cryptographic policies, time synchronization, and network parameter settings.
 
-Operating System: Red Hat Enterprise Linux 8
+## Prerequisites
 
-Sudo Permissions: The script requires superuser permissions to apply the configuration changes.
+- **Operating System**: Red Hat Enterprise Linux 8
+- **Sudo Permissions**: The script requires superuser permissions to apply configuration changes.
+- **Required Tools**: Ensure the following packages are installed:
+  - `chrony`
+  - `selinux-policy-targeted`
 
-Required Tools: Ensure the following packages are installed:
+## Usage Instructions
 
-chrony
+1. **Clone the Repository:**
+   ```bash
+   git clone https://github.com/StealthByte0/HardeningLinuxRhel.git
 
-selinux-policy-targeted
+   cd HardeningLinuxRhel
 
-Usage Instructions
+   sudo ./RHEL8.8.sh
 
-Clone the Repository:
 
-git clone https://github.com/StealthByte0/HardeningLinuxRhel.git
+## Script Components
 
-Navigate to the Project Directory:
+- **Disabling Filesystem Modules:** Disables unnecessary modules such as cramfs and hfs to minimize the attack surface.
 
-cd your_repository
+- **Package Updates and GPG Configuration:** Ensures package signatures are validated and security updates are applied.
 
-Run the Script:
+- **SELinux Configuration:** Enables SELinux in enforcing mode to provide an additional level of security.
 
-sudo ./RHEL8.8.sh
+- **Time Synchronization with Chrony:** Configures Chrony to keep the system clock synchronized with reliable time servers.
 
-Script Components
+- **Warning Banners Configuration:** Sets warning messages (MOTD) for system access, complying with corporate policies.
 
-Disabling Filesystem Modules: Disables unnecessary modules such as cramfs and hfs to minimize the attack surface.
+- **Network Parameter Settings:** Ensures important network parameters, such as redirects and TCP syncookies, are properly configured.
 
-Package Updates and GPG Configuration: Ensures package signatures are validated and security updates are applied.
 
-SELinux Configuration: Ensures SELinux is enabled in enforcing mode to provide an additional level of security.
+## Important Notes
 
-Time Synchronization with Chrony: Configures Chrony to keep the system clock synchronized with reliable time servers.
+- **Service Disabling:** The script disables several services that may not be necessary in a secure environment. Be sure to review them before running the script to avoid disrupting any critical services in your environment.
 
-Warning Banners Configuration: Sets warning messages (MOTD) for system access, complying with corporate policies.
 
-Network Parameter Settings: Ensures important network parameters, such as redirects and TCP syncookies, are properly configured.
-
-Important Notes
-
-Service Disabling: The script disables several services that may not be necessary in a secure environment. Be sure to review them before running the script to avoid disrupting any critical service in your environment.
-
-SELinux: SELinux is required in enforcing mode. If your application is not prepared to work with SELinux, this could impact system functionality.
-
-LicenseThis project is licensed under the MIT License - see the LICENSE file for more details.
+- **SELinux:** SELinux is required in enforcing mode. If your application is not configured to work with SELinux, this could impact system functionality.
